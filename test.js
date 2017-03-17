@@ -1,4 +1,4 @@
-var jed = 2;
+var jedi = 2;
 function getJed(){
-	return jed;
+	return jedi;
 }
