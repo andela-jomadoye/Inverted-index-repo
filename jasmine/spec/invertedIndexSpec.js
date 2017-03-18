@@ -2,7 +2,7 @@ const books = require('../jasmine/assets/correct.json');
 const wrongdata = require('../jasmine/assets/wrongFormat.json');
 const emptyfile = require('../jasmine/assets/emptyfile.json');
 const smallfile = require('../jasmine/assets/smallcorrectfile.json');
-const uniqueTermsBook = ["alice", "falls", "into", "a", "rabbit", "hole", "and", "enters", "world", "full", "of", "imagination", "an", "unusual", "alliance", "man", "elf", "dwarf", "wizard", "hobbit", "seek", "to", "destroy", "powerful", "ring"];
+const uniqueTermsBook = ['alice', 'falls', 'into', 'a', 'rabbit', 'hole', 'and', 'enters', 'world', 'full', 'of', 'imagination', 'an', 'unusual', 'alliance', 'man', 'elf', 'dwarf', 'wizard', 'hobbit', 'seek', 'to', 'destroy', 'powerful', 'ring'];
 
 describe('InvertedIndex Class', () => {
   beforeAll(() => {
@@ -23,24 +23,24 @@ describe('InvertedIndex Class', () => {
     });
   });
 
-  describe("tokenize", () => {
-    it("checks the tokenize function", () => {
-      let input = "jed is a boy"
-      let output = ["jed", "is", "a", "boy"];
+  describe('tokenize', () => {
+    it('checks the tokenize function', () => {
+      let input = 'jed is a boy'
+      let output = ['jed', 'is', 'a', 'boy'];
       expect(this.invertedIndex.tokenize(input))
         .toEqual(output);
     });
 
-    it("checks the tokenize function", () => {
-      let input = "tracy is not invited to my wedding"
-      let output = ["tracy", "is", "not", "invited", "to", "my", "wedding"];
+    it('checks the tokenize function', () => {
+      let input = 'tracy is not invited to my wedding'
+      let output = ['tracy', 'is', 'not', 'invited', 'to', 'my', 'wedding'];
       expect(this.invertedIndex.tokenize(input))
         .toEqual(output);
     });
 
-    it("checks the tokenize function", () => {
-      let input = "faith is on a call"
-      let output = ["faith", "is", "on", "a", "call"];
+    it('checks the tokenize function', () => {
+      let input = 'faith is on a call'
+      let output = ['faith', 'is', 'on', 'a', 'call'];
       expect(this.invertedIndex.tokenize(input))
         .toEqual(output);
     });
@@ -49,31 +49,31 @@ describe('InvertedIndex Class', () => {
   describe('getTextFromJsonObj', () => {
     it('should return an array of words', () => {
       expect(this.invertedIndex.getTextFromJsonObj(smallfile))
-        .toEqual(["alice", "falls", "into", "a", "rabbit"]);
+        .toEqual(['alice', 'falls', 'into', 'a', 'rabbit']);
     });
 
     it('filters out symbols', () => {
       expect(this.invertedIndex.getTextFromJsonObj(smallfile))
-        .toEqual(["alice", "falls", "into", "a", "rabbit"]);
+        .toEqual(['alice', 'falls', 'into', 'a', 'rabbit']);
     });
   });
 
-  describe("uniqueWords", () => {
-    it("checks the uniqueWords function", () => {
-      let input = ["aa", "aa", "aa"];
-      let output = ["aa"];
+  describe('uniqueWords', () => {
+    it('checks the uniqueWords function', () => {
+      let input = ['aa', 'aa', 'aa'];
+      let output = ['aa'];
       expect(this.invertedIndex.uniqueWords(input))
         .toEqual(output);
     });
 
-    it("checks the uniqueWords function", () => {
-      let input = ["aa", "bb", "bb", "aa"];
+    it('checks the uniqueWords function', () => {
+      let input = ['aa', 'bb', 'bb', 'aa'];
       let output = ['aa', 'bb'];
       expect(this.invertedIndex.uniqueWords(input))
         .toEqual(output);
     });
 
-    it("checks the uniqueWords function", () => {
+    it('checks the uniqueWords function', () => {
       let input = [1, 1, 1, 1];
       let output = [1];
       expect(this.invertedIndex.uniqueWords(input))
@@ -100,7 +100,7 @@ describe('InvertedIndex Class', () => {
 
   describe('CreateIndex', () => {
     beforeAll(() => {
-      this.invertedIndex.createIndex(smallfile, ["alice", "falls", "into", "a", "rabbit"], 'smallcorrectfile.json');
+      this.invertedIndex.createIndex(smallfile, ['alice', 'falls', 'into', 'a', 'rabbit'], 'smallcorrectfile.json');
       this.invertedIndex.createIndex(books, uniqueTermsBook, 'correct.json');
     });
     it('creates an index', () => {
@@ -126,14 +126,14 @@ describe('InvertedIndex Class', () => {
   });
 
   describe('GetIndex', () => {
-    it('should return "undefined" if index does not exist', () => {
+    it('should return 'undefined' if index does not exist', () => {
       expect(this.invertedIndex.getIndex(' '))
         .toEqual(undefined);
       expect(this.invertedIndex.getIndex('fakeName'))
         .toEqual(undefined);
     });
     it('returns the exact result of the index', () => {
-      this.invertedIndex.createIndex(smallfile, ["alice", "falls", "into", "a", "rabbit"], 'smallcorrectfile.json');
+      this.invertedIndex.createIndex(smallfile, ['alice', 'falls', 'into', 'a', 'rabbit'], 'smallcorrectfile.json');
       expect(this.invertedIndex.getIndex('smallcorrectfile.json'))
         .toEqual({
           a: [true],
@@ -146,48 +146,48 @@ describe('InvertedIndex Class', () => {
   });
 
   describe('searchIndex', () => {
-    it("returns empty if element being searched for does not exist", function () {
-      let keyword = "alice";
+    it('returns empty if element being searched for does not exist', function () {
+      let keyword = 'alice';
       let indexedData = {
-        "dan": [false, false],
-        "brown": [false, false],
-        "john": [false, false],
-        "grisham": [false, false]
+        'dan': [false, false],
+        'brown': [false, false],
+        'john': [false, false],
+        'grisham': [false, false]
       };
       let output = {};
       expect(this.invertedIndex.searchIndex(keyword, indexedData))
         .toEqual(output);
     });
 
-    it("returns the element being searched for", function () {
-      let keyword = "brown";
+    it('returns the element being searched for', function () {
+      let keyword = 'brown';
       let indexedData = {
-        "dan": [false, false],
-        "brown": [false, false],
-        "john": [false, false],
-        "grisham": [false, false]
+        'dan': [false, false],
+        'brown': [false, false],
+        'john': [false, false],
+        'grisham': [false, false]
       };
       let output = {
-        "brown": [false, false]
+        'brown': [false, false]
       };
       expect(this.invertedIndex.searchIndex(keyword, indexedData))
         .toEqual(output);
     });
 
-    it("returns the element being searched for", function () {
-      let keyword = "alice";
+    it('returns the element being searched for', function () {
+      let keyword = 'alice';
       let indexedData = {
-        "alice": [true, false, false, false],
-        "falls": [false, false, false, false],
-        "into": [false, false, false, false],
-        "a": [true, false, false, false],
-        "rabbit": [false, false, false, false],
-        "hole": [false, false, false, false],
-        "and": [true, false, false, false],
-        "ring": [false, true, true, true]
+        'alice': [true, false, false, false],
+        'falls': [false, false, false, false],
+        'into': [false, false, false, false],
+        'a': [true, false, false, false],
+        'rabbit': [false, false, false, false],
+        'hole': [false, false, false, false],
+        'and': [true, false, false, false],
+        'ring': [false, true, true, true]
       };
       let output = {
-        "alice": [true, false, false, false]
+        'alice': [true, false, false, false]
       };
       expect(this.invertedIndex.searchIndex(keyword, indexedData))
         .toEqual(output);
