@@ -126,7 +126,7 @@ describe('InvertedIndex Class', () => {
   });
 
   describe('GetIndex', () => {
-    it('should return 'undefined' if index does not exist', () => {
+    it('should return "undefined" if index does not exist', () => {
       expect(this.invertedIndex.getIndex(' '))
         .toEqual(undefined);
       expect(this.invertedIndex.getIndex('fakeName'))
