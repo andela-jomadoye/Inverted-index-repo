@@ -1,1 +1,4 @@
 # Inverted-index-repo
+
+
+[![Build Status](https://travis-ci.org/andela-jomadoye/Inverted-index-repo.svg?branch=master)](https://travis-ci.org/andela-jomadoye/Inverted-index-repo) [![Code Climate](https://codeclimate.com/github/andela-jomadoye/Inverted-index-repo/badges/gpa.svg)](https://codeclimate.com/github/andela-jomadoye/Inverted-index-repo) [![Test Coverage](https://codeclimate.com/github/andela-jomadoye/Inverted-index-repo/badges/coverage.svg)](https://codeclimate.com/github/andela-jomadoye/Inverted-index-repo/coverage) [![Issue Count](https://codeclimate.com/github/andela-jomadoye/Inverted-index-repo/badges/issue_count.svg)](https://codeclimate.com/github/andela-jomadoye/Inverted-index-repo) [![Coverage Status](https://coveralls.io/repos/github/andela-jomadoye/Inverted-index-repo/badge.svg)](https://coveralls.io/github/andela-jomadoye/Inverted-index-repo)
