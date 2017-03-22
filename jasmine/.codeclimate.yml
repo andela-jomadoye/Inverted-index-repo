@@ -1,0 +1,10 @@
+languages:
+  JavaScript: true
+exclude_paths:
+- "lib/es5/simplenumbers.js"
+- .npmignore
+- .travis.yml
+- .eslintrc.json
+- .babelrc
+- tests/test.js
+- jasmine
