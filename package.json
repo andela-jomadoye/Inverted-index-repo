@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "Andela inverted-index",
   "main": "index.js",
-  "scripts": {
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/andela-jomadoye/Inverted-index-repo.git"
@@ -16,8 +15,10 @@
   },
   "homepage": "https://github.com/andela-jomadoye/Inverted-index-repo#readme",
   "devDependencies": {
+    "browser-sync": "^2.18.8",
     "eslint": "^3.17.1",
     "eslint-config-airbnb-base": "^11.1.1",
-    "eslint-plugin-import": "^2.2.0"
+    "eslint-plugin-import": "^2.2.0",
+    "gulp": "^3.9.1"
   }
 }
