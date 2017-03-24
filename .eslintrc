@@ -1,6 +1,6 @@
 {
   "root": true,
-  "extends": "airbnb-base",
+  "extends": ["airbnb-base", "angular"],
   "env": {
     "node": true,
     "es6": true,
