@@ -1,5 +1,12 @@
+engines:
+  duplication:
+    enabled: true
 languages:
   JavaScript: true
+eslint:
+  enabled: true
+fixme:
+  enabled: true
 exclude_paths:
 - "lib/es5/simplenumbers.js"
 - .npmignore

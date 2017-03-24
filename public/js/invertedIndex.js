@@ -140,7 +140,7 @@ class InvertedIndex {
    *                                   searching, based on the string you are typing]
    */
   searchIndex(keywords, indexedData) {
-    if (keywords !== undefined && keywords.length > 0) {
+    if (angular.isDefined(keywords) && keywords.length > 0) {
       const keyword = keywords.replace(/[^\w\s]/gi, ' ')
         .match(/\w+/g);
       this.data = {};
