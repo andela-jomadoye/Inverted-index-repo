@@ -1,9 +1,51 @@
-const books = require('../jasmine/assets/correct.json');
-const wrongdata = require('../jasmine/assets/wrongFormat.json');
-const emptyfile = require('../jasmine/assets/emptyfile.json');
-const smallfile = require('../jasmine/assets/smallcorrectfile.json');
-const uniqueTermsBook = ['alice', 'falls', 'into', 'a', 'rabbit', 'hole', 'and', 'enters', 'world', 'full', 'of', 'imagination', 'an', 'unusual', 'alliance', 'man', 'elf', 'dwarf', 'wizard', 'hobbit', 'seek', 'to', 'destroy', 'powerful', 'ring'];
+const uniqueTermsBook = ['alice', 'falls', 'into', 'a'];
+const books = [{
+    "title": "Alice in New Wonderland",
+    "text": "Alice falls into a rabbit hole and enters a world full of imagination."
+  },
 
+  {
+    "title": "The Lord of the Rings: The New Fellowship of the Ring.",
+    "text": "An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring."
+  },
+
+  {
+    "title": "The Lord of the Rings: The New Fellowship of the Ring.",
+    "text": "An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring."
+  },
+  {
+    "title": "The Lord of the Rings: The New Fellowship of the Ring.",
+    "text": "An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring."
+  }
+];
+const wrongdata = [{
+    "title": "Alice in New Wonderland",
+    "text": "Alice falls into a rabbit hole and enters a world full of imagination."
+  },
+
+  {
+    "title": "The Lord of the Rings: The New Fellowship of the Ring.",
+    "text": "An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring."
+  },
+
+  {
+    "title": "The Lord of the Rings: The New Fellowship of the Ring.",
+    "text": "An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring."
+  },
+  {
+    "title": "The Lord of the Rings: The New Fellowship of the Ring.",
+    "text": "An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring."
+  },
+  {
+    "title": "The Lord of the Rings: The New Fellowship of the Ring.",
+    "textd": "An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring."
+  }
+];
+const emptyfile = ``;
+const smallfile = [{
+  "title": "Alice in New Wonderland",
+  "text": "Alice### falls @@into &&a ^^^rabbit $$"
+}];
 describe('InvertedIndex Class', () => {
   beforeAll(() => {
     this.invertedIndex = new InvertedIndex();
@@ -18,7 +60,7 @@ describe('InvertedIndex Class', () => {
     });
 
     it('has an indexes object to hold all indexes', () => {
-      expect(typeof this.invertedIndex.indexedDB)
+      expect(typeof this.invertedIndex.tableObj)
         .toEqual('object');
     });
   });
@@ -31,16 +73,9 @@ describe('InvertedIndex Class', () => {
         .toEqual(output);
     });
 
-    it('checks the tokenize function', () => {
-      const input = 'tracy is not invited to my wedding'
+    it('sanitizes the input in the tokenize function', () => {
+      const input = 'tracy!!! is !@#$%^&*not -invited. &to my (wedding)'
       const output = ['tracy', 'is', 'not', 'invited', 'to', 'my', 'wedding'];
-      expect(this.invertedIndex.tokenize(input))
-        .toEqual(output);
-    });
-
-    it('checks the tokenize function', () => {
-      const input = 'faith is on a call'
-      const output = ['faith', 'is', 'on', 'a', 'call'];
       expect(this.invertedIndex.tokenize(input))
         .toEqual(output);
     });
@@ -65,34 +100,20 @@ describe('InvertedIndex Class', () => {
       expect(this.invertedIndex.uniqueWords(input))
         .toEqual(output);
     });
-
-    it('checks the uniqueWords function', () => {
-      const input = ['aa', 'bb', 'bb', 'aa'];
-      const output = ['aa', 'bb'];
-      expect(this.invertedIndex.uniqueWords(input))
-        .toEqual(output);
-    });
-
-    it('checks the uniqueWords function', () => {
-      const input = [1, 1, 1, 1];
-      const output = [1];
-      expect(this.invertedIndex.uniqueWords(input))
-        .toEqual(output);
-    });
   });
 
   describe('Validate Files ', () => {
-    it('verifies that the JSON file is valid', () => {
-      expect(this.invertedIndex.validateFile(JSON.parse(books))
+    it('verifies that the JSON file is valid or invalid', () => {
+      expect(this.invertedIndex.validateFile(books)
           .valid)
         .toBe(true);
-      expect(this.invertedIndex.validateFile(JSON.parse(wrongfile))
+      expect(this.invertedIndex.validateFile(smallfile)
+          .valid)
+        .toBe(true);
+      expect(this.invertedIndex.validateFile(emptyfile)
           .valid)
         .toBe(false);
-      expect(this.invertedIndex.validateFile(JSON.parse(emptyfile))
-          .valid)
-        .toBe(false);
-      expect(this.invertedIndex.validateFile(JSON.parse(wrongdata))
+      expect(this.invertedIndex.validateFile(wrongdata)
           .valid)
         .toBe(false);
     });
@@ -100,7 +121,7 @@ describe('InvertedIndex Class', () => {
 
   describe('CreateIndex', () => {
     beforeAll(() => {
-      this.invertedIndex.createIndex(smallfile, ['alice', 'falls', 'into', 'a', 'rabbit'], 'smallcorrectfile.json');
+      this.invertedIndex.createIndex(smallfile, ['alice', 'falls'], 'smallcorrectfile.json');
       this.invertedIndex.createIndex(books, uniqueTermsBook, 'correct.json');
     });
     it('creates an index', () => {
@@ -113,14 +134,8 @@ describe('InvertedIndex Class', () => {
       expect(this.invertedIndex.getIndex('correct.json')
           .a)
         .toEqual([true, true, true, true]);
-      expect(this.invertedIndex.getIndex('correct.json')
-          .alice)
-        .toEqual([true, false, false, false]);
       expect(this.invertedIndex.getIndex('smallcorrectfile.json')
           .falls)
-        .toEqual([true]);
-      expect(this.invertedIndex.getIndex('smallcorrectfile.json')
-          .rabbit)
         .toEqual([true]);
     });
   });
@@ -173,24 +188,16 @@ describe('InvertedIndex Class', () => {
       expect(this.invertedIndex.searchIndex(keyword, indexedData))
         .toEqual(output);
     });
+  });
 
-    it('returns the element being searched for', () => {
-      const keyword = 'alice';
-      const indexedData = {
-        alice: [true, false, false, false],
-        falls: [false, false, false, false],
-        into: [false, false, false, false],
-        a: [true, false, false, false],
-        rabbit: [false, false, false, false],
-        hole: [false, false, false, false],
-        and: [true, false, false, false],
-        ring: [false, true, true, true]
-      };
-      const output = {
-        alice: [true, false, false, false]
-      };
-      expect(this.invertedIndex.searchIndex(keyword, indexedData))
-        .toEqual(output);
+  describe('searchAllFiles', () => {
+    beforeAll(() => {
+      this.invertedIndex.createIndex(smallfile, ['alice', 'falls'], 'smallcorrectfile.json');
+      this.invertedIndex.createIndex(books, uniqueTermsBook, 'correct.json');
+    });
+    it('returns an object containing all the indexed files', () => {
+      expect(typeof this.invertedIndex.searchAllFiles())
+        .toEqual('object');
     });
   });
 });

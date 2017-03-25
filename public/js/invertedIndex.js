@@ -53,9 +53,11 @@ class InvertedIndex {
       .forEach((key) => {
         const obj = fileJsonObject[key];
         newText += ' ';
-        newText += obj.text.toLowerCase();
+        newText += obj.text;
       });
-    const uniqueTerms = this.uniqueWords(this.tokenize(newText));
+    const uniqueTerms = this.uniqueWords(this.tokenize(newText))
+      .map(x => x.toLowerCase());
+      console.log(uniqueTerms);
     return uniqueTerms;
   }
 
@@ -113,8 +115,7 @@ class InvertedIndex {
       });
       indexedDB[uniqueKeys] = arr;
     });
-    this.tableObj[fileName] = indexedDB;
-    return indexedDB;
+    return this.tableObj[fileName] = indexedDB;
   }
 
   /**
@@ -140,7 +141,7 @@ class InvertedIndex {
    *                                   searching, based on the string you are typing]
    */
   searchIndex(keywords, indexedData) {
-    if (angular.isDefined(keywords) && keywords.length > 0) {
+    if (keywords !== undefined && keywords.length > 0) {
       const keyword = keywords.replace(/[^\w\s]/gi, ' ')
         .match(/\w+/g);
       this.data = {};

@@ -30,7 +30,7 @@ angular.module('root', ['ngAnimate', 'toastr'])
       document.getElementById('uploadedFilesSearch')
         .style.display = 'block';
     };
-   
+
     /**
      * This method generates the object of the file you want to search
      * @return {[Object]} [The object of the file you selected to search from]
@@ -75,23 +75,25 @@ angular.module('root', ['ngAnimate', 'toastr'])
         for (let i = 0; i < fileLength; i += 1) {
           const fileName = fileInput.files[i].name;
           const file = fileInput.files[i];
-          $scope.readFile(file).then((response) => {
-            const fileContent = angular.fromJson(response);
-            const validate = invertedIndex.validateFile(fileContent);
-            const validationStatus = validate.valid;
-            if (validationStatus) {
-              fileStore[file.name] = fileContent;
-              document.getElementById('uploadedFilesSelect')
-                .style.display = 'block';
-              toastr.success(`${fileName} has been uploaded`, 'File Uploaded');
-              resolve(fileStore);
-            } else {
-              toastr.error(`${fileName} is an invalid JSON file`, 'Error');
-              reject(fileStore[file.name]);
-            }
-          }).catch(() => {
-            toastr.error('Empty file', 'Warning', 'Error');
-          });
+          $scope.readFile(file)
+            .then((response) => {
+              const fileContent = angular.fromJson(response);
+              const validate = invertedIndex.validateFile(fileContent);
+              const validationStatus = validate.valid;
+              if (validationStatus) {
+                fileStore[file.name] = fileContent;
+                document.getElementById('uploadedFilesSelect')
+                  .style.display = 'block';
+                toastr.success(`${fileName} has been uploaded`, 'File Uploaded');
+                resolve(fileStore);
+              } else {
+                toastr.error(`${fileName} is an invalid JSON file`, 'Error');
+                reject(fileStore[file.name]);
+              }
+            })
+            .catch(() => {
+              toastr.error('Empty file', 'Warning', 'Error');
+            });
         }
       });
     };
