@@ -57,7 +57,7 @@ class InvertedIndex {
       });
     const uniqueTerms = this.uniqueWords(this.tokenize(newText))
       .map(x => x.toLowerCase());
-      console.log(uniqueTerms);
+    console.log(uniqueTerms);
     return uniqueTerms;
   }
 
@@ -157,4 +157,6 @@ class InvertedIndex {
   }
 
 }
-module.exports.InvertedIndex = InvertedIndex;
+if (typeof window === 'undefined') {
+  module.exports.InvertedIndex = InvertedIndex;
+}
