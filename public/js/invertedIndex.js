@@ -57,7 +57,6 @@ class InvertedIndex {
       });
     const uniqueTerms = this.uniqueWords(this.tokenize(newText))
       .map(x => x.toLowerCase());
-    console.log(uniqueTerms);
     return uniqueTerms;
   }
 
