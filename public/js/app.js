@@ -14,6 +14,7 @@ angular.module('root', ['ngAnimate', 'toastr'])
      * @return {[Object]} [the invertedIndex of all the unique terms in the object]
      */
     $scope.createIndex = () => {
+      $scope.searchKey = "";
       const getSelectedFile = document.getElementById('uploadedFilesSelect');
       const uploadedFileName = getSelectedFile.options[getSelectedFile.selectedIndex].text;
       if (uploadedFileName === '') {
@@ -29,6 +30,7 @@ angular.module('root', ['ngAnimate', 'toastr'])
       $scope.table2 = false;
       document.getElementById('uploadedFilesSearch')
         .style.display = 'block';
+      document.getElementById('uploadedFilesSearch').value = uploadedFileName;
     };
 
     /**
