@@ -1,7 +1,7 @@
 // Instance the tour
 const tour = new Tour({
   steps: [{
-    element: '.chooseFile',
+    element: '.uploadLabel',
     title: 'Select a JSON file',
     content: "Select a JSON file with keys of 'title' and 'text'.",
   }, {
@@ -17,7 +17,11 @@ const tour = new Tour({
     title: 'Search Index ',
     content: 'Type here to search for one or more words in the index table.',
   }, {
-    element: '.verticalLine',
+    element: '#uploadedFilesSearch',
+    title: 'Select file',
+    content: 'Select a file to search or "all" to search all files',
+  }, {
+    element: '.well',
     title: 'For more Info',
     content: 'Read here for more information, or make a pull request on the repository',
   }],

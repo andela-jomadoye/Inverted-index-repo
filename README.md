@@ -30,6 +30,8 @@ Inverted index takes a JSON array of text objects and creates an index from the 
 - EchmaScript 6 (JavaScript 2015)
 - Angular.js
 - Gulp (Task runner)
+- Karma (Generates Test Coverage Folder)
+- Browserify
 
 ## Usage
   - The app can be deployed directly to Heroku by clicking this  [button](https://slimjed.github.io/)
