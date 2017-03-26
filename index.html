@@ -169,8 +169,8 @@
                         <tr ng-repeat="(key, value) in tableVal">
                           <td>{{ key }}</td>
                           <td ng-repeat="present in value track by $index">
-                            <span ng-if="present == true"><i class="glyphicon glyphicon-ok"></i></span>
-                            <span ng-if="present == false"><i class="glyphicon glyphicon-remove"></i></span>
+                            <span class="green" ng-if="present == true"><i class="glyphicon glyphicon-ok"></i></span>
+                            <span class="red" ng-if="present == false"><i class="glyphicon glyphicon-remove"></i></span>
                           </td>
                         </tr>
                       </tbody>
