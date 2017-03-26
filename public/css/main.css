@@ -28,3 +28,7 @@
 .green {
 	color: green;
 }
+
+#uploadedFilesSearch {
+	display: none;
+}

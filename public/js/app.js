@@ -27,6 +27,8 @@ angular.module('root', ['ngAnimate', 'toastr'])
       $scope.docsMockTrue = true;
       $scope.table1 = true;
       $scope.table2 = false;
+      document.getElementById('uploadedFilesSearch')
+        .style.display = 'block';
     };
 
     /**
@@ -144,5 +146,13 @@ angular.module('root', ['ngAnimate', 'toastr'])
      * @param  {[String]} keyword [The string you want to search for]
      * @return {[Object]}         [The object of the string you searched for]
      */
-    $scope.filteredData = (keyword) => invertedIndex.searchIndex(keyword, $scope.indexedData);
+    $scope.filteredData = (keyword) => {
+      let name = document.getElementById('uploadedFilesSearch')
+        .value;
+      if (name === 'all') {
+        return $scope.searchAll;
+      } else {
+        return invertedIndex.searchIndex(keyword, $scope.indexedData);
+      }
+    }
   });
