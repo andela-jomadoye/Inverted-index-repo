@@ -27,8 +27,6 @@ angular.module('root', ['ngAnimate', 'toastr'])
       $scope.docsMockTrue = true;
       $scope.table1 = true;
       $scope.table2 = false;
-      document.getElementById('uploadedFilesSearch')
-        .style.display = 'block';
     };
 
     /**

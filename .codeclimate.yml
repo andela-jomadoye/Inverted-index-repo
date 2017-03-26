@@ -14,4 +14,5 @@ exclude_paths:
 - .eslintrc.json
 - .babelrc
 - tests/test.js
-- jasmine
+- jasmine/assets
+- jasmine/lib

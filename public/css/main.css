@@ -1,14 +1,4 @@
-#result {
-  display:block;
-  width:90%;
-  height:300px;
-}
-
 #uploadedFilesSelect{
-	display: none;
-}
-
-#uploadedFilesSearch{
 	display: none;
 }
 
@@ -16,31 +6,25 @@
   display: none;
 }
 
-.fbBlue {
-	color: #006699;
-}
-
 .verticalLine {
-  border-right: solid #006699;
+  border-left: solid #006699;
+  min-height: 690px;
+	height: 100%;
 }
-
-.buttonCustom {
-  background-color: #004A7F;
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-  border: none;
-  color: #FFFFFF;
-  cursor: pointer;
-  display: inline-block;
-  font-family: Arial;
-  font-size: 20px;
-  padding: 5px 10px;
-  text-align: center;
-  text-decoration: none;
+.faq {
+ color: #428bca;
 }
 
 .navbarImg {
 	max-width: 100px; 
 	margin-top: -7px; 
 	margin-right: 100px;
+}
+
+.red {
+	color: red;
+}
+
+.green {
+	color: green;
 }
