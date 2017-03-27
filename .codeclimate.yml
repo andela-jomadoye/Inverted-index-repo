@@ -37,3 +37,4 @@ exclude_paths:
 - .eslintrc
 - jasmine/assets/*
 - jasmine/lib/**/*
+- karma.conf.js
