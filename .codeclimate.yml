@@ -1,9 +1,15 @@
 engines:
   duplication:
-  	enabled: true
-    config:
-    	languages:
-      - javascript
+    enabled: true
+languages:
+  JavaScript: true
+eslint:
+  enabled: true
+fixme:
+  enabled: true
+ratings:
+  paths:
+  - "public/js/*"
 exclude_paths:
 - .travis.yml
 - .eslintrc
