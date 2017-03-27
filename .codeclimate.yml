@@ -1,6 +1,9 @@
 engines:
-  duplication:
-    enabled: true
+  duplications:
+    enabled: false
+    config:
+      languages:
+        - javascript
 languages:
   JavaScript: true
 eslint:
@@ -8,11 +11,7 @@ eslint:
 fixme:
   enabled: true
 exclude_paths:
-- "lib/es5/simplenumbers.js"
-- .npmignore
 - .travis.yml
-- .eslintrc.json
-- .babelrc
-- tests/test.js
+- .eslintrc
 - jasmine/assets
 - jasmine/lib
