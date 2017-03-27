@@ -25,6 +25,8 @@ engines:
         enabled: false
       no-param-reassign:
         enabled: false
+      angular/controller-as:
+        enabled: false
   fixme:
     enabled: true
 ratings:

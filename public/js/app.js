@@ -49,7 +49,8 @@ angular.module('root', ['ngAnimate', 'toastr'])
       } else {
         $scope.table2 = false;
         $scope.table1 = true;
-        const uniqueTerms = invertedIndex.getTextFromJsonObj($scope.fileStore[$scope.searchFileName]);
+        const getFileName= $scope.fileStore[$scope.searchFileName];
+        const uniqueTerms = invertedIndex.getTextFromJsonObj(getFileName);
         $scope.docsMock = $scope.indexedData[uniqueTerms[0]];
       }
     };

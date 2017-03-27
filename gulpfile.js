@@ -5,7 +5,7 @@ const bs = require('browser-sync')
 gulp.task('browser-sync', () => {
   bs.init({
     server: {
-      baseDir: "."
+      baseDir: '.'
     }
   });
 });
