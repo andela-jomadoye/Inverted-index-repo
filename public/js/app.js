@@ -49,7 +49,7 @@ angular.module('root', ['ngAnimate', 'toastr'])
       } else {
         $scope.table2 = false;
         $scope.table1 = true;
-        const getFileName= $scope.fileStore[$scope.searchFileName];
+        const getFileName = $scope.fileStore[$scope.searchFileName];
         const uniqueTerms = invertedIndex.getTextFromJsonObj(getFileName);
         $scope.docsMock = $scope.indexedData[uniqueTerms[0]];
       }
@@ -64,8 +64,8 @@ angular.module('root', ['ngAnimate', 'toastr'])
      * @return {[Object]}  it returns an object containing
      *                     the newly uploaded filename and the object of the file.
      */
-    $scope.processFile = (fileStore) => {
-      return new Promise((resolve, reject) => {
+    $scope.processFile = (fileStore) =>
+      new Promise((resolve, reject) => {
         const fileInput = document.getElementById('fileInput');
         const fileLength = fileInput.files.length;
         if (fileLength === 0) {
@@ -95,7 +95,6 @@ angular.module('root', ['ngAnimate', 'toastr'])
             });
         }
       });
-    };
 
     /**
      * [this function gets the number of books in each uploaded file]
