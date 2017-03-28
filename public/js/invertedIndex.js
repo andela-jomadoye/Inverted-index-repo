@@ -114,7 +114,8 @@ class InvertedIndex {
       });
       indexedDB[uniqueKeys] = arr;
     });
-    return this.tableObj[fileName] = indexedDB;
+    this.tableObj[fileName] = indexedDB;
+    return indexedDB;
   }
 
   /**
