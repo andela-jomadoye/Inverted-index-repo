@@ -74,9 +74,9 @@ class InvertedIndex {
     };
     Object.keys(parsedFile)
       .forEach((key) => {
-        const obj = parsedFile[key];
+        const uploadedFile = parsedFile[key];
         const validFormat = ['title', 'text'];
-        const parsedFileFormat = Object.keys(obj);
+        const parsedFileFormat = Object.keys(uploadedFile);
         const fileTextKey = Object.keys(parsedFileFormat)
           .map(objKeys => parsedFileFormat[objKeys]);
         if (validFormat.toString() === fileTextKey.toString()) {
