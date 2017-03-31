@@ -58,6 +58,7 @@ angular.module('root', ['ngAnimate', 'toastr'])
         }
         for (let i = 0; i < fileLength; i += 1) {
           const fileName = fileInput.files[i].name;
+          $scope.panelName = fileName;
           const file = fileInput.files[i];
           $scope.readFile(file)
             .then((response) => {
