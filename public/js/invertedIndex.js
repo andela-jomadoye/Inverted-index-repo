@@ -44,14 +44,14 @@ class InvertedIndex {
 
   /**
    * A method that tokenizes an object value and gets the unique terms in the object values
-   * @param  {Object} fileJsonObject the uploaded JSON file object
-   * @return {Array}  of the unique terms in the fileJsonObject
+   * @param  {Object} fileJson the uploaded JSON file object
+   * @return {Array}  of the unique terms in the fileJson
    */
-  getTextFromJsonObj(fileJsonObject) {
+  getTextFromJsonObj(fileJson) {
     let newText = ' ';
-    Object.keys(fileJsonObject)
+    Object.keys(fileJson)
       .forEach((key) => {
-        const obj = fileJsonObject[key];
+        const obj = fileJson[key];
         newText += ' ';
         newText += obj.text;
       });
@@ -77,9 +77,9 @@ class InvertedIndex {
         const obj = parsedFile[key];
         const validFormat = ['title', 'text'];
         const parsedFileFormat = Object.keys(obj);
-        const arr = Object.keys(parsedFileFormat)
+        const fileTextKey = Object.keys(parsedFileFormat)
           .map(objKeys => parsedFileFormat[objKeys]);
-        if (validFormat.toString() === arr.toString()) {
+        if (validFormat.toString() === fileTextKey.toString()) {
           this.isValid = {
             valid: true,
             message: 'This JSON Format is correct',
@@ -96,16 +96,16 @@ class InvertedIndex {
 
   /**
    * A method that create the index of the selected-file
-   * @param  {Object} fileJsonObject the uploaded file object
+   * @param  {Object} fileJson the uploaded file object
    * @param  {Array} uniqueTerms    the unique terms in the JSON file
    * @param  {String} fileName    The file name
    * @return {Object} containing the index of the selected-file
    */
-  createIndex(fileJsonObject, uniqueTerms, fileName) {
+  createIndex(fileJson, uniqueTerms, fileName) {
     const indexedDB = {};
     uniqueTerms.forEach((uniqueKeys) => {
       const arr = [];
-      fileJsonObject.forEach((jsonObjText) => {
+      fileJson.forEach((jsonObjText) => {
         arr.push((jsonObjText.text.toLowerCase())
           .includes(uniqueKeys));
       });

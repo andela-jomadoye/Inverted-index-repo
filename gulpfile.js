@@ -1,9 +1,9 @@
 const gulp = require('gulp');
-const bs = require('browser-sync')
+const browserSync = require('browser-sync')
   .create(); // create a browser sync instance.
 
 gulp.task('browser-sync', () => {
-  bs.init({
+  browserSync.init({
     server: {
       baseDir: '.'
     },
@@ -13,13 +13,13 @@ gulp.task('browser-sync', () => {
 
 gulp.task('watch', () => {
   gulp.watch('*.html')
-    .on('change', bs.reload);
+    .on('change', browserSync.reload);
   gulp.watch('public/js/*.js')
-    .on('change', bs.reload);
+    .on('change', browserSync.reload);
   gulp.watch('jasmine/**/*.js')
-    .on('change', bs.reload);
+    .on('change', browserSync.reload);
   gulp.watch('public/css/*.css')
-    .on('change', bs.reload);
+    .on('change', browserSync.reload);
 });
 
 gulp.task('default', ['watch', 'browser-sync']);
