@@ -14,14 +14,6 @@ class InvertedIndex {
   }
 
   /**
-   * returns the object containing all the uploadef files
-   * @return {Object} Index of all the files
-   */
-  searchAllFiles() {
-    return this.tableObj;
-  }
-
-  /**
    * A method that tokenizes the string that is passed through it
    * @param  {string} data the string that is gotten from the "text" key in the JSON object
    * @return {Array} containing String.
@@ -133,22 +125,42 @@ class InvertedIndex {
    *                  searching, based on the string you are typing.
    */
   searchIndex(keywords, fileName) {
-    const indexedData = this.getIndex(fileName);
-    if (keywords !== undefined && keywords.length > 0) {
-      const keyword = keywords.replace(/[^\w\s]/gi, ' ')
-        .match(/\w+/g);
-      this.searchData = {};
-      keyword.forEach((KEY) => {
-        const key = KEY.toLowerCase();
-        if (key in indexedData) {
-          this.searchData[key] = indexedData[key];
-        }
-      });
-      return this.searchData;
+    if (fileName !== 'all') {
+      const indexedData = this.getIndex(fileName);
+      if (keywords !== undefined && keywords.length > 0) {
+        const keyword = keywords.replace(/[^\w\s]/gi, ' ')
+          .match(/\w+/g);
+        this.searchData = {};
+        keyword.forEach((KEY) => {
+          const key = KEY.toLowerCase();
+          if (key in indexedData) {
+            this.searchData[key] = indexedData[key];
+          }
+        });
+        return this.searchData;
+      }
+      return indexedData;
+    } else {
+      if (keywords !== undefined && keywords.length > 0) {
+        const keyword = keywords.replace(/[^\w\s]/gi, ' ')
+          .match(/\w+/g);
+        const fileNames = Object.keys(this.tableObj);
+        this.searchDataAll = {};
+        fileNames.forEach((fileName) => {
+          this.searchDataAll[fileName] = {};
+          keyword.forEach((word) => {
+            const key = word.toLowerCase();
+            const filekey = Object.keys(this.tableObj[fileName]);
+            if (filekey.indexOf(key) > -1) {
+              this.searchDataAll[fileName][key] = this.tableObj[fileName][key];
+          }
+          });
+        });
+        return this.searchDataAll;
+      }
+      return this.tableObj;
     }
-    return indexedData;
   }
-
 }
 if (typeof window === 'undefined') {
   module.exports.InvertedIndex = InvertedIndex;
