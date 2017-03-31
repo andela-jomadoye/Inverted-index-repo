@@ -63,7 +63,7 @@ class InvertedIndex {
   /**
    * A method to validate a JSON file.
    * it check if the format of the .json file contains 
-   *  strictly keys of ["title","text"]
+   * strictly keys of ["title","text"]
    * @param {Object} parsedFile object
    * @returns {Object} containing boolean and a String.
    */
@@ -99,7 +99,7 @@ class InvertedIndex {
    * @param  {Object} fileJsonObject the uploaded file object
    * @param  {Array} uniqueTerms    the unique terms in the JSON file
    * @param  {String} fileName    The file name
-   * @return {Object}  containing the index of the selected-file 
+   * @return {Object} containing the index of the selected-file 
    */
   createIndex(fileJsonObject, uniqueTerms, fileName) {
     const indexedDB = {};
@@ -112,7 +112,6 @@ class InvertedIndex {
       indexedDB[uniqueKeys] = arr;
     });
     this.tableObj[fileName] = indexedDB;
-    console.log(JSON.stringify(indexedDB));
     return indexedDB;
   }
 
@@ -134,7 +133,7 @@ class InvertedIndex {
    *                  searching, based on the string you are typing.
    */
   searchIndex(keywords, fileName) {
-    let indexedData = this.getIndex(fileName);
+    const indexedData = this.getIndex(fileName);
     if (keywords !== undefined && keywords.length > 0) {
       const keyword = keywords.replace(/[^\w\s]/gi, ' ')
         .match(/\w+/g);
