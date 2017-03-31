@@ -36,10 +36,9 @@ angular.module('root', ['ngAnimate', 'toastr'])
         toastr.info('You must Create the Index a file to be able search through it', 'Info');
         $scope.docsMockTrue = false;
       } else if ($scope.searchFileName === 'all') {
-        $scope.searchAll = invertedIndex.searchAllFiles();
+        $scope.searchAll = invertedIndex.searchIndex('', 'all');
         $scope.table1 = false;
         $scope.table2 = true;
-        $scope.filteredData($scope.searchKey);
       } else {
         $scope.table2 = false;
         $scope.table1 = true;
@@ -121,4 +120,13 @@ angular.module('root', ['ngAnimate', 'toastr'])
       }
       return invertedIndex.searchIndex(keyword, fileName);
     };
+
+    $scope.filteredDataAll = {};
+    $scope.$watch("searchKey", (newValue, oldValue) => {
+        $scope.filteredDataAll = invertedIndex.searchIndex(newValue, 'all');
+    });
+
+    // $scope.filteredDataAll = (query) => {
+    //   return invertedIndex.searchIndex(query, 'all');
+    // }
   });
