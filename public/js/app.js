@@ -119,5 +119,5 @@ angular.module('root', ['ngAnimate', 'toastr'])
         fileName = $scope.searchFileName;
       }
       return invertedIndex.searchIndex(keyword, fileName);
-    }
+    };
   });

@@ -15,7 +15,7 @@ class InvertedIndex {
 
   /**
    * returns the object containing all the uploadef files
-   * @return {Object} Index of all the files 
+   * @return {Object} Index of all the files
    */
   searchAllFiles() {
     return this.tableObj;
@@ -62,7 +62,7 @@ class InvertedIndex {
 
   /**
    * A method to validate a JSON file.
-   * it check if the format of the .json file contains 
+   * it check if the format of the .json file contains
    * strictly keys of ["title","text"]
    * @param {Object} parsedFile object
    * @returns {Object} containing boolean and a String.
@@ -99,7 +99,7 @@ class InvertedIndex {
    * @param  {Object} fileJsonObject the uploaded file object
    * @param  {Array} uniqueTerms    the unique terms in the JSON file
    * @param  {String} fileName    The file name
-   * @return {Object} containing the index of the selected-file 
+   * @return {Object} containing the index of the selected-file
    */
   createIndex(fileJsonObject, uniqueTerms, fileName) {
     const indexedDB = {};
