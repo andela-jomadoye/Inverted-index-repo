@@ -5,8 +5,8 @@
 class InvertedIndex {
 
   /**
-   * [constructor description]
-   * @return {[type]} [description]
+   * class constructor
+   * @constructor
    */
   constructor() {
     this.unique = [];
@@ -14,8 +14,8 @@ class InvertedIndex {
   }
 
   /**
-   * [searchAllFiles description]
-   * @return {[type]} [description]
+   * returns the object containing all the uploadef files
+   * @return {Object} Index of all the files 
    */
   searchAllFiles() {
     return this.tableObj;
@@ -23,8 +23,8 @@ class InvertedIndex {
 
   /**
    * A method that tokenizes the string that is passed through it
-   * @param  {[string]} data [the string that is gotten from the "text" key in the JSON object]
-   * @return {[String]}      [returns an Array of strings]
+   * @param  {string} data the string that is gotten from the "text" key in the JSON object
+   * @return {Array} containing String.
    */
   tokenize(data) {
     this.terms = data.replace(/[^\w\s]/gi, ' ')
@@ -34,8 +34,8 @@ class InvertedIndex {
 
   /**
    * A method that filters the array passed into it for unique words
-   * @param {[String]} data [Array of strings]
-   * @returns {[String]} Returns array
+   * @param {String} data Array of strings
+   * @returns {String} Returns array of unique words
    */
   uniqueWords(data) {
     this.unique = [...new Set(data)];
@@ -44,8 +44,8 @@ class InvertedIndex {
 
   /**
    * A method that tokenizes an object value and gets the unique terms in the object values
-   * @param  {[Object]} fileJsonObject [the uploaded JSON file object]
-   * @return {[Array]}  Returns an array of the unique terms
+   * @param  {Object} fileJsonObject the uploaded JSON file object
+   * @return {Array}  of the unique terms in the fileJsonObject
    */
   getTextFromJsonObj(fileJsonObject) {
     let newText = ' ';
@@ -62,12 +62,10 @@ class InvertedIndex {
 
   /**
    * A method to validate a JSON file.
-   * it checks if the file has an extension of .json
-   * it check if the format of the .json file contains strictly
-   * keys of ["title","text"]
-   *
-   * @param {[Object]} parsedFile object
-   * @returns {[Object]} Returns boolean and a message.
+   * it check if the format of the .json file contains 
+   *  strictly keys of ["title","text"]
+   * @param {Object} parsedFile object
+   * @returns {Object} containing boolean and a String.
    */
   validateFile(parsedFile) {
     this.isValid = {
@@ -97,12 +95,11 @@ class InvertedIndex {
   }
 
   /**
-   * A method that create the index
-   *
-   * @param  {[Object]} fileJsonObject [the uploaded file object]
-   * @param  {[Array]} uniqueTerms    [the unique terms in the JSON file]
-   * @param  {[String]} fileName    [The file name]
-   * @return {[Object]}  Returns a promise containing an object
+   * A method that create the index of the selected-file
+   * @param  {Object} fileJsonObject the uploaded file object
+   * @param  {Array} uniqueTerms    the unique terms in the JSON file
+   * @param  {String} fileName    The file name
+   * @return {Object}  containing the index of the selected-file 
    */
   createIndex(fileJsonObject, uniqueTerms, fileName) {
     const indexedDB = {};
@@ -115,14 +112,14 @@ class InvertedIndex {
       indexedDB[uniqueKeys] = arr;
     });
     this.tableObj[fileName] = indexedDB;
+    console.log(JSON.stringify(indexedDB));
     return indexedDB;
   }
 
   /**
-   * A method that a specific index from the database object
-   *
-   * @param {[String]} fileName [the file name]
-   * @return {[Object]} [It returns an object containing keys of filenames and values of arrays]
+   * A method that gets the index of a filefrom the database object
+   * @param {String} fileName the file name
+   * @return {Object} containing keys of filenames and values of Arrays
    */
   getIndex(fileName) {
     return this.tableObj[fileName];
@@ -130,28 +127,25 @@ class InvertedIndex {
 
 
   /**
-   * immediatly the user starts typing on the search box, this if statemant becomes,
-   * true, because "keyword" becomes equal to a string and it's length is greater than 0.
-   * i created a new object, that contained only the element the user inputed in the searchbox,
-   * and i used it to populate the table.
-   * Searches through the table for a keyword
-   * @param  {[String]} keywords     [The string you are currently typing]
-   * @param  {[Object]} indexedData [An object of the table you are currently searching on]
-   * @return {[Object]}             [A filtered down version of the object you are currently
-   *                                   searching, based on the string you are typing]
+   * A method that searches the index of the current file
+   * @param  {String} keywords  the string you are currently typing
+   * @param  {String} fileName  the name of the file
+   * @return {Object} A filtered down version of the object you are currently
+   *                  searching, based on the string you are typing.
    */
-  searchIndex(keywords, indexedData) {
+  searchIndex(keywords, fileName) {
+    let indexedData = this.getIndex(fileName);
     if (keywords !== undefined && keywords.length > 0) {
       const keyword = keywords.replace(/[^\w\s]/gi, ' ')
         .match(/\w+/g);
-      this.data = {};
+      this.searchData = {};
       keyword.forEach((KEY) => {
         const key = KEY.toLowerCase();
         if (key in indexedData) {
-          this.data[key] = indexedData[key];
+          this.searchData[key] = indexedData[key];
         }
       });
-      return this.data;
+      return this.searchData;
     }
     return indexedData;
   }
