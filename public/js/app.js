@@ -125,8 +125,4 @@ angular.module('root', ['ngAnimate', 'toastr'])
     $scope.$watch("searchKey", (newValue, oldValue) => {
         $scope.filteredDataAll = invertedIndex.searchIndex(newValue, 'all');
     });
-
-    // $scope.filteredDataAll = (query) => {
-    //   return invertedIndex.searchIndex(query, 'all');
-    // }
   });
