@@ -24,3 +24,4 @@ exclude_paths:
 - jasmine/assets/*
 - jasmine/lib/**/*
 - karma.conf.js
+- server.js
