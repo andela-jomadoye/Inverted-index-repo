@@ -1,3 +1,4 @@
 /node_modules/*
 /jasmine/*
 /public/js/angular-toastr.tpls.js
+server.js
