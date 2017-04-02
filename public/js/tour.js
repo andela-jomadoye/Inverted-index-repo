@@ -1,7 +1,7 @@
 // Instance the tour
 const tour = new Tour({
   steps: [{
-    element: '.uploadLabel',
+    element: '.fileUpload',
     title: 'Select a JSON file',
     content: "Select a JSON file with keys of 'title' and 'text'.",
   }, {
