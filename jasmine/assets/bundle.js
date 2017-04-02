@@ -266,14 +266,16 @@ describe('InvertedIndex Class', () => {
         });
     });
     it('returns the same object if search-query is empty in all-files', () => {
-      const keyword = 'alice';
+      const keyword = '';
       const fileName = 'all';
       const output = {
         'correct.json': {
-          alice: [true, false, false, false]
+          alice: [true, false, false, false],
+          falls: [true, false, false, false]
         },
         'smallcorrectfile.json': {
-          alice: [true]
+          alice: [true],
+          falls: [true]
         }
       };
       expect(this.invertedIndex.searchIndex(keyword, fileName))
