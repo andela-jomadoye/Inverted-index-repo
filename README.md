@@ -2,6 +2,7 @@
 [![Build Status](https://travis-ci.org/andela-jomadoye/Inverted-index-repo.svg?branch=master)](https://travis-ci.org/andela-jomadoye/Inverted-index-repo) [![Code Climate](https://codeclimate.com/github/andela-jomadoye/Inverted-index-repo/badges/gpa.svg)](https://codeclimate.com/github/andela-jomadoye/Inverted-index-repo) [![Test Coverage](https://codeclimate.com/github/andela-jomadoye/Inverted-index-repo/badges/issue_count.svg)](https://codeclimate.com/github/andela-jomadoye/Inverted-index-repo) [![Coverage Status](https://coveralls.io/repos/github/andela-jomadoye/Inverted-index-repo/badge.svg?branch=development)](https://coveralls.io/github/andela-jomadoye/Inverted-index-repo?branch=development)
 [![Known Vulnerabilities](https://snyk.io/test/github/andela-jomadoye/inverted-index-repo/badge.svg)](https://snyk.io/test/github/andela-jomadoye/inverted-index-repo)
 ![badge](https://david-dm.org/andela-jomadoye/Inverted-index-repo.svg)
+![badge](https://circleci.com/gh/andela-jomadoye/Inverted-index-repo/tree/development.png?circle-token=:circle-token)
 
 ## Introduction
 Inverted index takes a JSON array of text objects and creates an index from the array. The index allows a user to search for text blocks in the array that contain a specified collection of words.
