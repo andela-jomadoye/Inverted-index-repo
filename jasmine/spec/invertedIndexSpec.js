@@ -89,9 +89,9 @@ describe('InvertedIndex Class', () => {
     it('creates the correct index', () => {
       expect(this.invertedIndex.createIndex(smallfile, uniqueTermsBook, 'smallcorrectfile.json'))
         .toEqual({
-          'alice': [true],
+          alice: [true],
           falls: [true],
-          'into': [true],
+          into: [true],
           a: [true],
           rabbit: [true]
         });
@@ -142,7 +142,14 @@ describe('InvertedIndex Class', () => {
     it('returns the element being searched for in all files', () => {
       const keyword = 'alice';
       const fileName = 'all';
-      const output = { 'correct.json': { alice: [true, false, false, false] }, 'smallcorrectfile.json': { alice: [true] } };
+      const output = {
+        'correct.json': {
+          alice: [true, false, false, false]
+        },
+        'smallcorrectfile.json': {
+          alice: [true]
+        }
+      };
       expect(this.invertedIndex.searchIndex(keyword, fileName))
         .toEqual(output);
     });

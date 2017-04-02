@@ -19,8 +19,9 @@ angular.module('root', ['ngAnimate', 'toastr'])
       }
       const selectedFileObj = $scope.fileStore[$scope.uploadedFileName];
       const uniqueTerms =
-      invertedIndex.getTextFromJsonObj($scope.fileStore[$scope.uploadedFileName]);
-      invertedIndex.createIndex(selectedFileObj, uniqueTerms, $scope.uploadedFileName);
+      invertedIndex.getTextFromJsonObj(selectedFileObj);
+      const fileName = $scope.uploadedFileName;
+      invertedIndex.createIndex(selectedFileObj, uniqueTerms, fileName);
       $scope.indexedData = invertedIndex.getIndex($scope.uploadedFileName);
       $scope.docsMock = $scope.indexedData[uniqueTerms[0]];
       $scope.docsMockTrue = true;
@@ -122,7 +123,7 @@ angular.module('root', ['ngAnimate', 'toastr'])
     };
 
     $scope.filteredDataAll = {};
-    $scope.$watch('searchKey', (newValue, oldValue) => {
+    $scope.$watch('searchKey', (newValue) => {
       $scope.filteredDataAll = invertedIndex.searchIndex(newValue, 'all');
     });
   });
