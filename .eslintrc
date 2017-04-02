@@ -14,7 +14,9 @@
     "FileReader": false,
     "InvertedIndex": false,
     "document": false,
-    "Tour": false
+    "Tour": false,
+    "expect": false,
+    "beforeAll": false
   },
   "rules": {
     "one-var": 0,
