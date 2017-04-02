@@ -1,4 +1,5 @@
 /node_modules/*
-/jasmine/*
+/jasmine/**/*
 public/js/angular-toastr.tpls.js
 server.js
+karma.conf.js
