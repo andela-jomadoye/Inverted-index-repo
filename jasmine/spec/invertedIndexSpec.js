@@ -9,6 +9,46 @@ describe('InvertedIndex Class', () => {
     this.invertedIndex = new InvertedIndex();
   });
 
+  describe('Class instantaion', () => {
+    it('should be instantiated with the "new" keyword', () => {
+      const init = () => {
+        InvertedIndex();
+      };
+      expect(init).toThrowError
+      (`Class constructor InvertedIndex cannot be invoked without 'new'`);
+    });
+  });
+
+  describe('InvertedIndex class', () => {
+    it('Should contain the getIndex method', () => {
+      expect(typeof this.invertedIndex.tokenize).toBe('function');
+    });
+
+    it('Should contain the createIndex method', () => {
+      expect(typeof this.invertedIndex.uniqueWords).toBe('function');
+    });
+
+    it('Should contain the searchIndex method', () => {
+      expect(typeof this.invertedIndex.getTextFromJsonObj).toBe('function');
+    });
+
+    it('Should contain the readFile method', () => {
+      expect(typeof this.invertedIndex.validateFile).toBe('function');
+    });
+
+    it('Should contain the tokenize method', () => {
+      expect(typeof this.invertedIndex.createIndex).toBe('function');
+    });
+
+    it('Should contain the validateFile method', () => {
+      expect(typeof this.invertedIndex.getIndex).toBe('function');
+    });
+
+    it('Should contain the validateFile method', () => {
+      expect(typeof this.invertedIndex.searchIndex).toBe('function');
+    });
+  });
+
   describe('Constructor', () => {
     it('can create inverted index instance', () => {
       expect(typeof this.invertedIndex)
