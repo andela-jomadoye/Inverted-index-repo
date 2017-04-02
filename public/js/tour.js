@@ -7,7 +7,7 @@ const tour = new Tour({
   }, {
     element: '.uploadFile',
     title: 'Save File',
-    content: 'Click this button to save the file or files to the local storage.',
+    content: 'Click this button to save the file(s) to the local storage.',
   }, {
     element: '.createIndex',
     title: 'Create Inverted-Index',
@@ -23,7 +23,7 @@ const tour = new Tour({
   }, {
     element: '.well',
     title: 'For more Info',
-    content: 'Read here for more information, or make a pull request on the repository',
+    content: 'Read here for more info, or make a pull request on the repo',
   }],
   backdrop: true,
   storage: false,
