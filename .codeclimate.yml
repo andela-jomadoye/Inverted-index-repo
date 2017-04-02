@@ -25,3 +25,4 @@ exclude_paths:
 - jasmine/lib/**/*
 - karma.conf.js
 - server.js
+- gulpfile.js
