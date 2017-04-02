@@ -70,38 +70,45 @@ describe('InvertedIndex Class', () => {
       const init = () => {
         InvertedIndex();
       };
-      expect(init).toThrowError
-      (`Class constructor InvertedIndex cannot be invoked without 'new'`);
+      expect(init)
+        .toThrowError(`Class constructor InvertedIndex cannot be invoked without 'new'`);
     });
   });
 
   describe('InvertedIndex class', () => {
     it('Should contain the getIndex method', () => {
-      expect(typeof this.invertedIndex.tokenize).toBe('function');
+      expect(typeof this.invertedIndex.tokenize)
+        .toBe('function');
     });
 
     it('Should contain the createIndex method', () => {
-      expect(typeof this.invertedIndex.uniqueWords).toBe('function');
+      expect(typeof this.invertedIndex.uniqueWords)
+        .toBe('function');
     });
 
     it('Should contain the searchIndex method', () => {
-      expect(typeof this.invertedIndex.getTextFromJsonObj).toBe('function');
+      expect(typeof this.invertedIndex.getTextFromJsonObj)
+        .toBe('function');
     });
 
     it('Should contain the readFile method', () => {
-      expect(typeof this.invertedIndex.validateFile).toBe('function');
+      expect(typeof this.invertedIndex.validateFile)
+        .toBe('function');
     });
 
     it('Should contain the tokenize method', () => {
-      expect(typeof this.invertedIndex.createIndex).toBe('function');
+      expect(typeof this.invertedIndex.createIndex)
+        .toBe('function');
     });
 
     it('Should contain the validateFile method', () => {
-      expect(typeof this.invertedIndex.getIndex).toBe('function');
+      expect(typeof this.invertedIndex.getIndex)
+        .toBe('function');
     });
 
     it('Should contain the validateFile method', () => {
-      expect(typeof this.invertedIndex.searchIndex).toBe('function');
+      expect(typeof this.invertedIndex.searchIndex)
+        .toBe('function');
     });
   });
 
@@ -236,6 +243,29 @@ describe('InvertedIndex Class', () => {
         .toEqual(output);
     });
     it('returns the element being searched for in all files', () => {
+      const keyword = 'alice';
+      const fileName = 'all';
+      const output = {
+        'correct.json': {
+          alice: [true, false, false, false]
+        },
+        'smallcorrectfile.json': {
+          alice: [true]
+        }
+      };
+      expect(this.invertedIndex.searchIndex(keyword, fileName))
+        .toEqual(output);
+    });
+    it('returns the same object if search-query is empty in specific file', () => {
+      const keyword = '';
+      const fileName = 'smallcorrectfile.json';
+      expect(this.invertedIndex.searchIndex(keyword, fileName))
+        .toEqual({
+          alice: [true],
+          falls: [true]
+        });
+    });
+    it('returns the same object if search-query is empty in all-files', () => {
       const keyword = 'alice';
       const fileName = 'all';
       const output = {
