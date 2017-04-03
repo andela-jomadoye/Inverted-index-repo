@@ -66,7 +66,7 @@ angular.module('root', ['ngAnimate', 'toastr'])
         $scope.readFile(file)
           .then((response) => {
             const fileContent = angular.fromJson(response);
-            const validate = invertedIndex.validateFile(fileContent);
+            const validate = InvertedIndex.validateFile(fileContent);
             const validationStatus = validate.valid;
             if (validationStatus) {
               fileStore[file.name] = fileContent;

@@ -26,32 +26,32 @@ describe('InvertedIndex Class', () => {
         .toBe('function');
     });
 
-    it('Should contain the createIndex method', () => {
+    it('Should contain the uniqueWords method', () => {
       expect(typeof this.invertedIndex.uniqueWords)
         .toBe('function');
     });
 
-    it('Should contain the searchIndex method', () => {
+    it('Should contain the getTextFromJsonObj method', () => {
       expect(typeof this.invertedIndex.getTextFromJsonObj)
         .toBe('function');
     });
 
-    it('Should contain the readFile method', () => {
-      expect(typeof this.invertedIndex.validateFile)
+    it('Should contain the validateFile method', () => {
+      expect(typeof InvertedIndex.validateFile)
         .toBe('function');
     });
 
-    it('Should contain the tokenize method', () => {
+    it('Should contain the createIndex method', () => {
       expect(typeof this.invertedIndex.createIndex)
         .toBe('function');
     });
 
-    it('Should contain the validateFile method', () => {
+    it('Should contain the getIndex method', () => {
       expect(typeof this.invertedIndex.getIndex)
         .toBe('function');
     });
 
-    it('Should contain the validateFile method', () => {
+    it('Should contain the searchIndex method', () => {
       expect(typeof this.invertedIndex.searchIndex)
         .toBe('function');
     });
@@ -66,7 +66,7 @@ describe('InvertedIndex Class', () => {
     });
 
     it('has an indexes object to hold all indexes', () => {
-      expect(typeof this.invertedIndex.tableObj)
+      expect(typeof this.invertedIndex.globalIndex)
         .toEqual('object');
     });
   });
@@ -110,18 +110,18 @@ describe('InvertedIndex Class', () => {
 
   describe('Validate Files ', () => {
     it('should return true if a valid file was uploaded', () => {
-      expect(this.invertedIndex.validateFile(books)
+      expect(InvertedIndex.validateFile(books)
           .valid)
         .toBe(true);
-      expect(this.invertedIndex.validateFile(smallfile)
+      expect(InvertedIndex.validateFile(smallfile)
           .valid)
         .toBe(true);
     });
     it('should return false if an invalid file was uploaded', () => {
-      expect(this.invertedIndex.validateFile(emptyfile)
+      expect(InvertedIndex.validateFile(emptyfile)
           .valid)
         .toBe(false);
-      expect(this.invertedIndex.validateFile(wrongdata)
+      expect(InvertedIndex.validateFile(wrongdata)
           .valid)
         .toBe(false);
     });
