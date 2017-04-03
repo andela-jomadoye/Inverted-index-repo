@@ -71,7 +71,8 @@ describe('InvertedIndex Class', () => {
         InvertedIndex();
       };
       expect(init)
-        .toThrowError(`Class constructor InvertedIndex cannot be invoked without 'new'`);
+        .toThrowError('Class constructor ' +
+          'InvertedIndex cannot be invoked without \'new\'');
     });
   });
 
@@ -81,32 +82,32 @@ describe('InvertedIndex Class', () => {
         .toBe('function');
     });
 
-    it('Should contain the createIndex method', () => {
+    it('Should contain the uniqueWords method', () => {
       expect(typeof this.invertedIndex.uniqueWords)
         .toBe('function');
     });
 
-    it('Should contain the searchIndex method', () => {
-      expect(typeof this.invertedIndex.getTextFromJsonObj)
+    it('Should contain the getText method', () => {
+      expect(typeof this.invertedIndex.getText)
         .toBe('function');
     });
 
-    it('Should contain the readFile method', () => {
-      expect(typeof this.invertedIndex.validateFile)
+    it('Should contain the validateFile method', () => {
+      expect(typeof InvertedIndex.validateFile)
         .toBe('function');
     });
 
-    it('Should contain the tokenize method', () => {
+    it('Should contain the createIndex method', () => {
       expect(typeof this.invertedIndex.createIndex)
         .toBe('function');
     });
 
-    it('Should contain the validateFile method', () => {
+    it('Should contain the getIndex method', () => {
       expect(typeof this.invertedIndex.getIndex)
         .toBe('function');
     });
 
-    it('Should contain the validateFile method', () => {
+    it('Should contain the searchIndex method', () => {
       expect(typeof this.invertedIndex.searchIndex)
         .toBe('function');
     });
@@ -121,7 +122,7 @@ describe('InvertedIndex Class', () => {
     });
 
     it('has an indexes object to hold all indexes', () => {
-      expect(typeof this.invertedIndex.tableObj)
+      expect(typeof this.invertedIndex.globalIndex)
         .toEqual('object');
     });
   });
@@ -142,14 +143,14 @@ describe('InvertedIndex Class', () => {
     });
   });
 
-  describe('getTextFromJsonObj', () => {
+  describe('getText', () => {
     it('should return an array of words', () => {
-      expect(this.invertedIndex.getTextFromJsonObj(smallfile))
+      expect(this.invertedIndex.getText(smallfile))
         .toEqual(['alice', 'falls', 'into', 'a', 'rabbit']);
     });
 
     it('filters out symbols', () => {
-      expect(this.invertedIndex.getTextFromJsonObj(smallfile))
+      expect(this.invertedIndex.getText(smallfile))
         .toEqual(['alice', 'falls', 'into', 'a', 'rabbit']);
     });
   });
@@ -165,18 +166,18 @@ describe('InvertedIndex Class', () => {
 
   describe('Validate Files ', () => {
     it('should return true if a valid file was uploaded', () => {
-      expect(this.invertedIndex.validateFile(books)
+      expect(InvertedIndex.validateFile(books)
           .valid)
         .toBe(true);
-      expect(this.invertedIndex.validateFile(smallfile)
+      expect(InvertedIndex.validateFile(smallfile)
           .valid)
         .toBe(true);
     });
     it('should return false if an invalid file was uploaded', () => {
-      expect(this.invertedIndex.validateFile(emptyfile)
+      expect(InvertedIndex.validateFile(emptyfile)
           .valid)
         .toBe(false);
-      expect(this.invertedIndex.validateFile(wrongdata)
+      expect(InvertedIndex.validateFile(wrongdata)
           .valid)
         .toBe(false);
     });
@@ -184,13 +185,16 @@ describe('InvertedIndex Class', () => {
 
   describe('CreateIndex', () => {
     it('creates an index', () => {
-      expect(this.invertedIndex.createIndex(books, uniqueTermsBook, 'correct.json'))
+      expect(this.invertedIndex
+          .createIndex(books, 'correct.json'))
         .toBeTruthy();
-      expect(this.invertedIndex.createIndex(smallfile, uniqueTermsBook, 'smallcorrectfile.json'))
+      expect(this.invertedIndex
+          .createIndex(smallfile, 'smallcorrectfile.json'))
         .toBeTruthy();
     });
     it('creates the correct index', () => {
-      expect(this.invertedIndex.createIndex(smallfile, uniqueTermsBook, 'smallcorrectfile.json'))
+      expect(this.invertedIndex
+          .createIndex(smallfile, 'smallcorrectfile.json'))
         .toEqual({
           alice: [true],
           falls: [true],
@@ -209,7 +213,8 @@ describe('InvertedIndex Class', () => {
         .toEqual(undefined);
     });
     it('returns the exact result of the index', () => {
-      this.invertedIndex.createIndex(smallfile, ['alice', 'falls', 'into', 'a', 'rabbit'], 'smallcorrectfile.json');
+      this.invertedIndex
+        .createIndex(smallfile, 'smallcorrectfile.json');
       expect(this.invertedIndex.getIndex('smallcorrectfile.json'))
         .toEqual({
           a: [true],
@@ -223,8 +228,9 @@ describe('InvertedIndex Class', () => {
 
   describe('searchIndex', () => {
     beforeAll(() => {
-      this.invertedIndex.createIndex(smallfile, ['alice', 'falls'], 'smallcorrectfile.json');
-      this.invertedIndex.createIndex(books, ['alice', 'falls'], 'correct.json');
+      this.invertedIndex
+        .createIndex(smallfile, 'smallcorrectfile.json');
+      this.invertedIndex.createIndex(books, 'correct.json');
     });
     it('returns empty if element being searched for does not exist', () => {
       const keyword = 'unqwerty';
@@ -256,13 +262,16 @@ describe('InvertedIndex Class', () => {
       expect(this.invertedIndex.searchIndex(keyword, fileName))
         .toEqual(output);
     });
-    it('returns the same object if search-query is empty in specific file', () => {
+    it('returns the same object if search-query is empty in file', () => {
       const keyword = '';
       const fileName = 'smallcorrectfile.json';
       expect(this.invertedIndex.searchIndex(keyword, fileName))
         .toEqual({
+          a: [true],
           alice: [true],
-          falls: [true]
+          falls: [true],
+          into: [true],
+          rabbit: [true]
         });
     });
     it('returns the same object if search-query is empty in all-files', () => {
@@ -271,11 +280,37 @@ describe('InvertedIndex Class', () => {
       const output = {
         'correct.json': {
           alice: [true, false, false, false],
-          falls: [true, false, false, false]
+          falls: [true, false, false, false],
+          into: [true, false, false, false],
+          a: [true, true, true, true],
+          rabbit: [true, false, false, false],
+          hole: [true, false, false, false],
+          and: [true, true, true, true],
+          enters: [true, false, false, false],
+          world: [true, false, false, false],
+          full: [true, false, false, false],
+          of: [true, true, true, true],
+          imagination: [true, false, false, false],
+          an: [true, true, true, true],
+          unusual: [false, true, true, true],
+          alliance: [false, true, true, true],
+          man: [false, true, true, true],
+          elf: [false, true, true, true],
+          dwarf: [false, true, true, true],
+          wizard: [false, true, true, true],
+          hobbit: [false, true, true, true],
+          seek: [false, true, true, true],
+          to: [true, true, true, true],
+          destroy: [false, true, true, true],
+          powerful: [false, true, true, true],
+          ring: [false, true, true, true]
         },
         'smallcorrectfile.json': {
+          a: [true],
           alice: [true],
-          falls: [true]
+          falls: [true],
+          into: [true],
+          rabbit: [true]
         }
       };
       expect(this.invertedIndex.searchIndex(keyword, fileName))
