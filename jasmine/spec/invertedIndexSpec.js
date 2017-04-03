@@ -16,7 +16,7 @@ describe('InvertedIndex Class', () => {
       };
       expect(init)
         .toThrowError('Class constructor ' +
-        'InvertedIndex cannot be invoked without \'new\'');
+          'InvertedIndex cannot be invoked without \'new\'');
     });
   });
 
@@ -130,15 +130,15 @@ describe('InvertedIndex Class', () => {
   describe('CreateIndex', () => {
     it('creates an index', () => {
       expect(this.invertedIndex
-          .createIndex(books, uniqueTermsBook, 'correct.json'))
+          .createIndex(books, 'correct.json'))
         .toBeTruthy();
       expect(this.invertedIndex
-          .createIndex(smallfile, uniqueTermsBook, 'smallcorrectfile.json'))
+          .createIndex(smallfile, 'smallcorrectfile.json'))
         .toBeTruthy();
     });
     it('creates the correct index', () => {
       expect(this.invertedIndex
-          .createIndex(smallfile, uniqueTermsBook, 'smallcorrectfile.json'))
+          .createIndex(smallfile, 'smallcorrectfile.json'))
         .toEqual({
           alice: [true],
           falls: [true],
@@ -158,8 +158,7 @@ describe('InvertedIndex Class', () => {
     });
     it('returns the exact result of the index', () => {
       this.invertedIndex
-        .createIndex(smallfile, ['alice', 'falls', 'into', 'a', 'rabbit'],
-         'smallcorrectfile.json');
+        .createIndex(smallfile, 'smallcorrectfile.json');
       expect(this.invertedIndex.getIndex('smallcorrectfile.json'))
         .toEqual({
           a: [true],
@@ -174,8 +173,8 @@ describe('InvertedIndex Class', () => {
   describe('searchIndex', () => {
     beforeAll(() => {
       this.invertedIndex
-        .createIndex(smallfile, ['alice', 'falls'], 'smallcorrectfile.json');
-      this.invertedIndex.createIndex(books, ['alice', 'falls'], 'correct.json');
+        .createIndex(smallfile, 'smallcorrectfile.json');
+      this.invertedIndex.createIndex(books, 'correct.json');
     });
     it('returns empty if element being searched for does not exist', () => {
       const keyword = 'unqwerty';
@@ -212,8 +211,11 @@ describe('InvertedIndex Class', () => {
       const fileName = 'smallcorrectfile.json';
       expect(this.invertedIndex.searchIndex(keyword, fileName))
         .toEqual({
+          a: [true],
           alice: [true],
-          falls: [true]
+          falls: [true],
+          into: [true],
+          rabbit: [true]
         });
     });
     it('returns the same object if search-query is empty in all-files', () => {
@@ -222,11 +224,37 @@ describe('InvertedIndex Class', () => {
       const output = {
         'correct.json': {
           alice: [true, false, false, false],
-          falls: [true, false, false, false]
+          falls: [true, false, false, false],
+          into: [true, false, false, false],
+          a: [true, true, true, true],
+          rabbit: [true, false, false, false],
+          hole: [true, false, false, false],
+          and: [true, true, true, true],
+          enters: [true, false, false, false],
+          world: [true, false, false, false],
+          full: [true, false, false, false],
+          of: [true, true, true, true],
+          imagination: [true, false, false, false],
+          an: [true, true, true, true],
+          unusual: [false, true, true, true],
+          alliance: [false, true, true, true],
+          man: [false, true, true, true],
+          elf: [false, true, true, true],
+          dwarf: [false, true, true, true],
+          wizard: [false, true, true, true],
+          hobbit: [false, true, true, true],
+          seek: [false, true, true, true],
+          to: [true, true, true, true],
+          destroy: [false, true, true, true],
+          powerful: [false, true, true, true],
+          ring: [false, true, true, true]
         },
         'smallcorrectfile.json': {
+          a: [true],
           alice: [true],
-          falls: [true]
+          falls: [true],
+          into: [true],
+          rabbit: [true]
         }
       };
       expect(this.invertedIndex.searchIndex(keyword, fileName))

@@ -89,12 +89,12 @@ class InvertedIndex {
   /**
    * A method that create the index of the selected-file
    * @param  {Object} fileJson the uploaded file object
-   * @param  {Array} uniqueTerms    the unique terms in the JSON file
    * @param  {String} fileName    The file name
    * @return {Object} containing the index of the selected-file
    */
-  createIndex(fileJson, uniqueTerms, fileName) {
+  createIndex(fileJson, fileName) {
     const indexedFiles = {};
+    const uniqueTerms = this.getTextFromJsonObj(fileJson);
     uniqueTerms.forEach((uniqueKeys) => {
       const arr = [];
       fileJson.forEach((jsonObjText) => {
@@ -104,6 +104,7 @@ class InvertedIndex {
       indexedFiles[uniqueKeys] = arr;
     });
     this.globalIndex[fileName] = indexedFiles;
+    console.log(JSON.stringify(indexedFiles));
     return indexedFiles;
   }
 

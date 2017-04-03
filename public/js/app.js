@@ -21,7 +21,7 @@ angular.module('root', ['ngAnimate', 'toastr'])
       const uniqueTerms =
       invertedIndex.getTextFromJsonObj(selectedFileObj);
       const fileName = $scope.uploadedFileName;
-      invertedIndex.createIndex(selectedFileObj, uniqueTerms, fileName);
+      invertedIndex.createIndex(selectedFileObj, fileName);
       $scope.indexedData = invertedIndex.getIndex($scope.uploadedFileName);
       $scope.docsMock = $scope.indexedData[uniqueTerms[0]];
       $scope.docsMockTrue = true;
