@@ -87,8 +87,8 @@ describe('InvertedIndex Class', () => {
         .toBe('function');
     });
 
-    it('Should contain the getTextFromJsonObj method', () => {
-      expect(typeof this.invertedIndex.getTextFromJsonObj)
+    it('Should contain the getText method', () => {
+      expect(typeof this.invertedIndex.getText)
         .toBe('function');
     });
 
@@ -143,14 +143,14 @@ describe('InvertedIndex Class', () => {
     });
   });
 
-  describe('getTextFromJsonObj', () => {
+  describe('getText', () => {
     it('should return an array of words', () => {
-      expect(this.invertedIndex.getTextFromJsonObj(smallfile))
+      expect(this.invertedIndex.getText(smallfile))
         .toEqual(['alice', 'falls', 'into', 'a', 'rabbit']);
     });
 
     it('filters out symbols', () => {
-      expect(this.invertedIndex.getTextFromJsonObj(smallfile))
+      expect(this.invertedIndex.getText(smallfile))
         .toEqual(['alice', 'falls', 'into', 'a', 'rabbit']);
     });
   });

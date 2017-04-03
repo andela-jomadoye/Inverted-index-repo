@@ -36,14 +36,14 @@ class InvertedIndex {
 
   /**
    * A method that tokenizes an object and gets the unique terms in the object
-   * @param  {Object} fileJson the uploaded JSON file object
-   * @return {Array}  of the unique terms in the fileJson
+   * @param  {Object} file the uploaded JSON file object
+   * @return {Array}  of the unique terms in the file
    */
-  getTextFromJsonObj(fileJson) {
+  getText(file) {
     let newText = `${' '}`;
-    Object.keys(fileJson)
+    Object.keys(file)
       .forEach((key) => {
-        const obj = fileJson[key];
+        const obj = file[key];
         newText += `${' '}`;
         newText += obj.text;
       });
@@ -88,23 +88,22 @@ class InvertedIndex {
 
   /**
    * A method that create the index of the selected-file
-   * @param  {Object} fileJson the uploaded file object
+   * @param  {Object} file the uploaded file object
    * @param  {String} fileName    The file name
    * @return {Object} containing the index of the selected-file
    */
-  createIndex(fileJson, fileName) {
+  createIndex(file, fileName) {
     const indexedFiles = {};
-    const uniqueTerms = this.getTextFromJsonObj(fileJson);
+    const uniqueTerms = this.getText(file);
     uniqueTerms.forEach((uniqueKeys) => {
       const arr = [];
-      fileJson.forEach((jsonObjText) => {
+      file.forEach((jsonObjText) => {
         arr.push((jsonObjText.text.toLowerCase())
           .includes(uniqueKeys));
       });
       indexedFiles[uniqueKeys] = arr;
     });
     this.globalIndex[fileName] = indexedFiles;
-    console.log(JSON.stringify(indexedFiles));
     return indexedFiles;
   }
 
