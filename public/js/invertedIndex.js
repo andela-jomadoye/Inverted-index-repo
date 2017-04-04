@@ -64,25 +64,31 @@ class InvertedIndex {
       valid: false,
       message: 'This is an Invalid JSON File',
     };
-    Object.keys(parsedFile)
-      .forEach((key) => {
-        const uploadedFile = parsedFile[key];
-        const validFormat = ['title', 'text'];
-        const parsedFileFormat = Object.keys(uploadedFile);
-        const fileTextKey = Object.keys(parsedFileFormat)
-          .map(objKeys => parsedFileFormat[objKeys]);
-        if (validFormat.toString() === fileTextKey.toString()) {
-          isValid = {
-            valid: true,
-            message: 'This JSON Format is correct',
-          };
-        } else {
-          isValid = {
-            valid: false,
-            message: 'This JSON Format is Incorrect',
-          };
-        }
-      });
+    try {
+      Object.keys(parsedFile)
+        .forEach((key) => {
+          const uploadedFile = parsedFile[key];
+          const validFormat = ['title', 'text'];
+          const parsedFileFormat = Object.keys(uploadedFile);
+          const fileTextKey = Object.keys(parsedFileFormat)
+            .map(objKeys => parsedFileFormat[objKeys]);
+          if (validFormat.toString() === fileTextKey.toString()) {
+            isValid = {
+              valid: true,
+              message: 'This JSON Format is correct',
+            };
+          } else {
+            isValid = {
+              valid: false,
+              message: 'This JSON Format is Incorrect',
+            };
+            throw isValid;
+          }
+        });
+    } catch (error) {
+      if (error.valid === false) return error;
+      throw error;
+    }
     return isValid;
   }
 
