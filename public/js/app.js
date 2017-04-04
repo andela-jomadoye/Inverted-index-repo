@@ -19,7 +19,7 @@ angular.module('root', ['ngAnimate', 'toastr'])
       }
       const selectedFileObj = $scope.fileStore[$scope.uploadedFileName];
       const uniqueTerms =
-      invertedIndex.getText(selectedFileObj);
+      InvertedIndex.getText(selectedFileObj);
       const fileName = $scope.uploadedFileName;
       invertedIndex.createIndex(selectedFileObj, fileName);
       $scope.indexedFile = invertedIndex.getIndex($scope.uploadedFileName);
@@ -35,7 +35,7 @@ angular.module('root', ['ngAnimate', 'toastr'])
       const getSearchFile = document.getElementById('uploadedFilesSearch');
       $scope.searchFileName =
       getSearchFile.options[getSearchFile.selectedIndex].text;
-      $scope.indexedFile = invertedIndex.getIndex($scope.searchFileName);
+      $scope.indexedFile = InvertedIndex.getIndex($scope.searchFileName);
       if (angular.isUndefined($scope.indexedFile) &&
       $scope.searchFileName !== 'all') {
         toastr.info('You must Create the Index of a file to search it', 'Info');
@@ -48,7 +48,7 @@ angular.module('root', ['ngAnimate', 'toastr'])
         $scope.table2 = false;
         $scope.table1 = true;
         const getFileName = $scope.fileStore[$scope.searchFileName];
-        const uniqueTerms = invertedIndex.getText(getFileName);
+        const uniqueTerms = InvertedIndex.getText(getFileName);
         $scope.docsMock = $scope.indexedFile[uniqueTerms[0]];
       }
     };
