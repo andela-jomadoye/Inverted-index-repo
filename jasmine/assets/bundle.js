@@ -31,7 +31,7 @@ module.exports=[
 },{}],4:[function(require,module,exports){
 module.exports=[
   {
-    "title": "Alice in New Wonderland",
+    "titlea": "Alice in New Wonderland",
     "text": "Alice falls into a rabbit hole and enters a world full of imagination."
   },
 
@@ -50,7 +50,7 @@ module.exports=[
   },
   {
     "title": "The Lord of the Rings: The New Fellowship of the Ring.",
-    "textd": "An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring."
+    "text": "An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring."
   }
 ]
 },{}],5:[function(require,module,exports){
