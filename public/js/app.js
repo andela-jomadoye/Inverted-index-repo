@@ -35,7 +35,7 @@ angular.module('root', ['ngAnimate', 'toastr'])
       const getSearchFile = document.getElementById('uploadedFilesSearch');
       $scope.searchFileName =
       getSearchFile.options[getSearchFile.selectedIndex].text;
-      $scope.indexedFile = InvertedIndex.getIndex($scope.searchFileName);
+      $scope.indexedFile = invertedIndex.getIndex($scope.searchFileName);
       if (angular.isUndefined($scope.indexedFile) &&
       $scope.searchFileName !== 'all') {
         toastr.info('You must Create the Index of a file to search it', 'Info');
