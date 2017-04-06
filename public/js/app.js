@@ -17,11 +17,11 @@ angular.module('root', ['ngAnimate', 'toastr'])
       if ($scope.uploadedFileName === '') {
         toastr.error('Please select a file and click Create index', 'Error');
       }
-      const selectedFileObj = $scope.fileStore[$scope.uploadedFileName];
+      const selectedFile = $scope.fileStore[$scope.uploadedFileName];
       const uniqueTerms =
-      InvertedIndex.getText(selectedFileObj);
+      InvertedIndex.getText(selectedFile);
       const fileName = $scope.uploadedFileName;
-      invertedIndex.createIndex(selectedFileObj, fileName);
+      invertedIndex.createIndex(selectedFile, fileName);
       $scope.indexedFile = invertedIndex.getIndex($scope.uploadedFileName);
       $scope.docsMock = $scope.indexedFile[uniqueTerms[0]];
       $scope.docsMockTrue = true;
@@ -80,7 +80,7 @@ angular.module('root', ['ngAnimate', 'toastr'])
             }
           })
           .catch(() => {
-            toastr.error('Empty file', 'Warning', 'Error');
+            toastr.error('This is an invalid JSON file', 'Warning', 'Error');
           });
       }
     });
@@ -109,6 +109,8 @@ angular.module('root', ['ngAnimate', 'toastr'])
           $scope.$apply(() => {
             $scope.fileNames = Object.keys(result);
           });
+        })
+        .catch(() => {
         });
     };
 

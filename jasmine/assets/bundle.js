@@ -54,11 +54,10 @@ module.exports=[
   }
 ]
 },{}],5:[function(require,module,exports){
-const uniqueTermsBook = ['alice', 'falls', 'into', 'a', 'rabbit'];
 const books = require('../assets/books.json');
-const wrongdata = require('../assets/wrongdata.json');
-const emptyfile = require('../assets/emptyfile.json');
-const smallfile = require('../assets/smallfile.json');
+const wrongData = require('../assets/wrongData.json');
+const emptyFile = require('../assets/emptyFile.json');
+const smallFile = require('../assets/smallFile.json');
 
 describe('InvertedIndex Class', () => {
   beforeAll(() => {
@@ -71,8 +70,8 @@ describe('InvertedIndex Class', () => {
         InvertedIndex();
       };
       expect(init)
-        .toThrowError('Class constructor ' +
-          'InvertedIndex cannot be invoked without \'new\'');
+        .toThrowError(`Class constructor ` +
+          `InvertedIndex cannot be invoked without 'new'`);
     });
   });
 
@@ -145,12 +144,12 @@ describe('InvertedIndex Class', () => {
 
   describe('getText', () => {
     it('should return an array of words', () => {
-      expect(InvertedIndex.getText(smallfile))
+      expect(InvertedIndex.getText(smallFile))
         .toEqual(['alice', 'falls', 'into', 'a', 'rabbit']);
     });
 
     it('filters out symbols', () => {
-      expect(InvertedIndex.getText(smallfile))
+      expect(InvertedIndex.getText(smallFile))
         .toEqual(['alice', 'falls', 'into', 'a', 'rabbit']);
     });
   });
@@ -169,15 +168,15 @@ describe('InvertedIndex Class', () => {
       expect(InvertedIndex.validateFile(books)
           .valid)
         .toBe(true);
-      expect(InvertedIndex.validateFile(smallfile)
+      expect(InvertedIndex.validateFile(smallFile)
           .valid)
         .toBe(true);
     });
     it('should return false if an invalid file was uploaded', () => {
-      expect(InvertedIndex.validateFile(emptyfile)
+      expect(InvertedIndex.validateFile(emptyFile)
           .valid)
         .toBe(false);
-      expect(InvertedIndex.validateFile(wrongdata)
+      expect(InvertedIndex.validateFile(wrongData)
           .valid)
         .toBe(false);
     });
@@ -189,12 +188,12 @@ describe('InvertedIndex Class', () => {
           .createIndex(books, 'correct.json'))
         .toBeTruthy();
       expect(this.invertedIndex
-          .createIndex(smallfile, 'smallcorrectfile.json'))
+          .createIndex(smallFile, 'smallcorrectfile.json'))
         .toBeTruthy();
     });
     it('creates the correct index', () => {
       expect(this.invertedIndex
-          .createIndex(smallfile, 'smallcorrectfile.json'))
+          .createIndex(smallFile, 'smallcorrectfile.json'))
         .toEqual({
           alice: [true],
           falls: [true],
@@ -214,7 +213,7 @@ describe('InvertedIndex Class', () => {
     });
     it('returns the exact result of the index', () => {
       this.invertedIndex
-        .createIndex(smallfile, 'smallcorrectfile.json');
+        .createIndex(smallFile, 'smallcorrectfile.json');
       expect(this.invertedIndex.getIndex('smallcorrectfile.json'))
         .toEqual({
           a: [true],
@@ -229,13 +228,21 @@ describe('InvertedIndex Class', () => {
   describe('searchIndex', () => {
     beforeAll(() => {
       this.invertedIndex
-        .createIndex(smallfile, 'smallcorrectfile.json');
+        .createIndex(smallFile, 'smallcorrectfile.json');
       this.invertedIndex.createIndex(books, 'correct.json');
     });
     it('returns empty if element being searched for does not exist', () => {
       const keyword = 'unqwerty';
       const fileName = 'smallcorrectfile.json';
       const output = {};
+      expect(this.invertedIndex.searchIndex(keyword, fileName))
+        .toEqual(output);
+    });
+
+    it('fail', () => {
+      const keyword = 'unqwerty';
+      const fileName = 'smallcorrectfile.json';
+      const output = {jed};
       expect(this.invertedIndex.searchIndex(keyword, fileName))
         .toEqual(output);
     });
@@ -319,4 +326,4 @@ describe('InvertedIndex Class', () => {
   });
 });
 
-},{"../assets/books.json":1,"../assets/emptyfile.json":2,"../assets/smallfile.json":3,"../assets/wrongdata.json":4}]},{},[5]);
+},{"../assets/books.json":1,"../assets/emptyFile.json":2,"../assets/smallFile.json":3,"../assets/wrongData.json":4}]},{},[5]);
