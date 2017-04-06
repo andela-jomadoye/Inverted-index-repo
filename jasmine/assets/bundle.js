@@ -70,8 +70,8 @@ describe('InvertedIndex Class', () => {
         InvertedIndex();
       };
       expect(init)
-        .toThrowError(`Class constructor ` +
-          `InvertedIndex cannot be invoked without 'new'`);
+        .toThrowError(`Class constructor` +
+           ` InvertedIndex cannot be invoked without 'new'`);
     });
   });
 
@@ -235,14 +235,6 @@ describe('InvertedIndex Class', () => {
       const keyword = 'unqwerty';
       const fileName = 'smallcorrectfile.json';
       const output = {};
-      expect(this.invertedIndex.searchIndex(keyword, fileName))
-        .toEqual(output);
-    });
-
-    it('fail', () => {
-      const keyword = 'unqwerty';
-      const fileName = 'smallcorrectfile.json';
-      const output = {jed};
       expect(this.invertedIndex.searchIndex(keyword, fileName))
         .toEqual(output);
     });
