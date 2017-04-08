@@ -24,11 +24,18 @@ module.exports={}
 },{}],3:[function(require,module,exports){
 module.exports=[
   {
+    "msg": "Class constructor InvertedIndex cannot be invoked without 'new'"
+  }
+]
+
+},{}],4:[function(require,module,exports){
+module.exports=[
+  {
     "title": "Alice in New Wonderland",
     "text": "Alice### falls @@into &&a ^^^rabbit $$"
   }
 ]
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 module.exports=[
   {
     "titlea": "Alice in New Wonderland",
@@ -53,25 +60,25 @@ module.exports=[
     "text": "An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring."
   }
 ]
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 const books = require('../assets/books.json');
 const wrongData = require('../assets/wrongData.json');
 const emptyFile = require('../assets/emptyFile.json');
 const smallFile = require('../assets/smallFile.json');
+const errorMsg = require('../assets/errorMsg.json');
 
 describe('InvertedIndex Class', () => {
   beforeAll(() => {
-    this.invertedIndex = new InvertedIndex();
+    invertedIndex = new InvertedIndex();
   });
 
   describe('Class instantaion', () => {
     it('should be instantiated with the "new" keyword', () => {
-      const msg = `Class constructor InvertedIndex cannot be invoked without 'new'`
       const init = () => {
         InvertedIndex();
       };
       expect(init)
-        .toThrowError(msg);
+        .toThrowError(errorMsg[0].msg);
     });
   });
 
@@ -97,31 +104,31 @@ describe('InvertedIndex Class', () => {
     });
 
     it('Should contain the createIndex method', () => {
-      expect(typeof this.invertedIndex.createIndex)
+      expect(typeof invertedIndex.createIndex)
         .toBe('function');
     });
 
     it('Should contain the getIndex method', () => {
-      expect(typeof this.invertedIndex.getIndex)
+      expect(typeof invertedIndex.getIndex)
         .toBe('function');
     });
 
     it('Should contain the searchIndex method', () => {
-      expect(typeof this.invertedIndex.searchIndex)
+      expect(typeof invertedIndex.searchIndex)
         .toBe('function');
     });
   });
 
   describe('Constructor', () => {
     it('can create inverted index instance', () => {
-      expect(typeof this.invertedIndex)
+      expect(typeof invertedIndex)
         .toEqual('object');
-      expect(this.invertedIndex instanceof InvertedIndex)
+      expect(invertedIndex instanceof InvertedIndex)
         .toBe(true);
     });
 
     it('has an indexes object to hold all indexes', () => {
-      expect(typeof this.invertedIndex.globalIndex)
+      expect(typeof invertedIndex.globalIndex)
         .toEqual('object');
     });
   });
@@ -186,15 +193,15 @@ describe('InvertedIndex Class', () => {
 
   describe('CreateIndex', () => {
     it('creates an index', () => {
-      expect(this.invertedIndex
+      expect(invertedIndex
           .createIndex(books, 'correct.json'))
         .toBeTruthy();
-      expect(this.invertedIndex
+      expect(invertedIndex
           .createIndex(smallFile, 'smallcorrectfile.json'))
         .toBeTruthy();
     });
     it('creates the correct index', () => {
-      expect(this.invertedIndex
+      expect(invertedIndex
           .createIndex(smallFile, 'smallcorrectfile.json'))
         .toEqual({
           alice: [true],
@@ -208,15 +215,15 @@ describe('InvertedIndex Class', () => {
 
   describe('GetIndex', () => {
     it('should return "undefined" if index does not exist', () => {
-      expect(this.invertedIndex.getIndex(' '))
+      expect(invertedIndex.getIndex(' '))
         .toEqual(undefined);
-      expect(this.invertedIndex.getIndex('fakeName'))
+      expect(invertedIndex.getIndex('fakeName'))
         .toEqual(undefined);
     });
     it('returns the exact result of the index', () => {
-      this.invertedIndex
+      invertedIndex
         .createIndex(smallFile, 'smallcorrectfile.json');
-      expect(this.invertedIndex.getIndex('smallcorrectfile.json'))
+      expect(invertedIndex.getIndex('smallcorrectfile.json'))
         .toEqual({
           a: [true],
           alice: [true],
@@ -229,15 +236,15 @@ describe('InvertedIndex Class', () => {
 
   describe('searchIndex', () => {
     beforeAll(() => {
-      this.invertedIndex
+      invertedIndex
         .createIndex(smallFile, 'smallcorrectfile.json');
-      this.invertedIndex.createIndex(books, 'correct.json');
+      invertedIndex.createIndex(books, 'correct.json');
     });
     it('returns empty if element being searched for does not exist', () => {
       const keyword = 'unqwerty';
       const fileName = 'smallcorrectfile.json';
       const output = {};
-      expect(this.invertedIndex.searchIndex(keyword, fileName))
+      expect(invertedIndex.searchIndex(keyword, fileName))
         .toEqual(output);
     });
     it('returns the element being searched for in a specific file', () => {
@@ -246,7 +253,7 @@ describe('InvertedIndex Class', () => {
       const output = {
         alice: [true]
       };
-      expect(this.invertedIndex.searchIndex(keyword, fileName))
+      expect(invertedIndex.searchIndex(keyword, fileName))
         .toEqual(output);
     });
     it('returns the element being searched for in all files', () => {
@@ -260,13 +267,13 @@ describe('InvertedIndex Class', () => {
           alice: [true]
         }
       };
-      expect(this.invertedIndex.searchIndex(keyword, fileName))
+      expect(invertedIndex.searchIndex(keyword, fileName))
         .toEqual(output);
     });
     it('returns the same object if search-query is empty in file', () => {
       const keyword = '';
       const fileName = 'smallcorrectfile.json';
-      expect(this.invertedIndex.searchIndex(keyword, fileName))
+      expect(invertedIndex.searchIndex(keyword, fileName))
         .toEqual({
           a: [true],
           alice: [true],
@@ -314,10 +321,10 @@ describe('InvertedIndex Class', () => {
           rabbit: [true]
         }
       };
-      expect(this.invertedIndex.searchIndex(keyword, fileName))
+      expect(invertedIndex.searchIndex(keyword, fileName))
         .toEqual(output);
     });
   });
 });
 
-},{"../assets/books.json":1,"../assets/emptyFile.json":2,"../assets/smallFile.json":3,"../assets/wrongData.json":4}]},{},[5]);
+},{"../assets/books.json":1,"../assets/emptyFile.json":2,"../assets/errorMsg.json":3,"../assets/smallFile.json":4,"../assets/wrongData.json":5}]},{},[6]);
